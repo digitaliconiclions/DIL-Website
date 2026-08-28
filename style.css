@@ -1,8 +1,3 @@
-/* =========================================
-   DIGITAL ICONIC LIONS — DIL
-   Premium Website Design
-========================================= */
-
 :root {
     --bg: #070707;
     --card: #111111;
@@ -30,61 +25,98 @@ body {
     line-height: 1.6;
 }
 
-/* ---------- HEADER ---------- */
+/* NAVBAR */
 
 header {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: rgba(7, 7, 7, 0.95);
+    background: rgba(7, 7, 7, 0.96);
     border-bottom: 1px solid var(--border);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
 }
 
-nav {
+nav,
+.navbar {
+    width: 100%;
     max-width: 1200px;
     margin: auto;
-    padding: 18px 25px;
+    padding: 15px 25px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
 }
 
 .logo {
     color: var(--gold);
     font-size: 22px;
     font-weight: 800;
-    letter-spacing: 1px;
 }
 
-nav a {
-    color: var(--white);
-    text-decoration: none;
-    margin-left: 22px;
-    font-size: 14px;
-    transition: 0.3s;
-}
-
-nav a:hover {
+.logo-text {
     color: var(--gold);
 }
 
-/* ---------- HERO ---------- */
+nav a,
+.nav-links a {
+    color: var(--white);
+    text-decoration: none;
+    margin-left: 20px;
+    transition: 0.3s;
+}
+
+nav a:hover,
+.nav-links a:hover {
+    color: var(--gold);
+}
+
+/* IMPORTANT: normal links/buttons */
+
+a {
+    color: var(--gold);
+}
+
+.btn,
+.primary-button {
+    display: inline-block;
+    padding: 14px 28px;
+    margin-top: 25px;
+    border-radius: 8px;
+    background: var(--gold);
+    color: #000 !important;
+    text-decoration: none;
+    font-weight: 700;
+    border: none;
+}
+
+.secondary-button {
+    display: inline-block;
+    padding: 14px 28px;
+    margin-top: 25px;
+    border: 1px solid var(--gold);
+    border-radius: 8px;
+    color: var(--gold) !important;
+    text-decoration: none;
+}
+
+/* HERO */
 
 .hero {
     min-height: 90vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 80px 25px;
     text-align: center;
-    padding: 80px 20px;
     background:
         radial-gradient(circle at top, rgba(245,185,66,0.16), transparent 40%),
         var(--bg);
 }
 
 .hero-content {
+    width: 100%;
     max-width: 850px;
+    margin: auto;
 }
 
 .badge {
@@ -94,8 +126,6 @@ nav a:hover {
     border-radius: 50px;
     color: var(--gold);
     margin-bottom: 22px;
-    font-size: 13px;
-    letter-spacing: 1px;
 }
 
 .hero h1 {
@@ -115,111 +145,67 @@ nav a:hover {
     font-size: 18px;
 }
 
-/* ---------- BUTTONS ---------- */
-
-.btn {
-    display: inline-block;
-    margin-top: 30px;
-    padding: 14px 28px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 700;
-    transition: 0.3s;
-}
-
-.btn-primary {
-    background: var(--gold);
-    color: #000;
-}
-
-.btn-primary:hover {
-    background: var(--gold-light);
-    transform: translateY(-3px);
-}
-
-.btn-secondary {
-    border: 1px solid var(--gold);
-    color: var(--gold);
-    margin-left: 10px;
-}
-
-.btn-secondary:hover {
-    background: var(--gold);
-    color: #000;
-}
-
-/* ---------- SECTIONS ---------- */
+/* SECTIONS */
 
 section {
+    width: 100%;
     max-width: 1200px;
     margin: auto;
     padding: 90px 25px;
 }
 
-.section-title {
+.section-title,
+.section-heading {
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 45px;
 }
 
-.section-title h2 {
+.section-title h2,
+.section-heading h2 {
     font-size: 42px;
     margin-bottom: 12px;
 }
 
-.section-title p {
+.section-title p,
+.section-heading p {
     color: var(--muted);
 }
 
-/* ---------- CARDS ---------- */
+/* CARDS */
 
-.cards {
+.cards,
+.problem-grid,
+.steps,
+.about-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 22px;
 }
 
-.card {
+.card,
+.info-card,
+.step {
     background: linear-gradient(145deg, #151515, #0c0c0c);
     border: 1px solid var(--border);
     border-radius: 16px;
     padding: 30px;
-    transition: 0.3s;
 }
 
-.card:hover {
-    transform: translateY(-8px);
-    border-color: var(--gold);
-    box-shadow: 0 15px 40px rgba(245,185,66,0.12);
-}
-
-.card-icon {
-    font-size: 35px;
-    margin-bottom: 18px;
-}
-
-.card h3 {
+.card h3,
+.info-card h3 {
     color: var(--gold);
     margin-bottom: 10px;
 }
 
-.card p {
+.card p,
+.info-card p {
     color: var(--muted);
 }
 
-/* ---------- HOW IT WORKS ---------- */
-
-.steps {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-}
+/* STEP NUMBER */
 
 .step {
     text-align: center;
-    padding: 35px 25px;
-    background: #101010;
-    border-radius: 16px;
-    border: 1px solid var(--border);
 }
 
 .step-number {
@@ -233,15 +219,15 @@ section {
     background: var(--gold);
     color: #000;
     font-weight: 900;
-    font-size: 20px;
 }
 
-/* ---------- CTA ---------- */
+/* CTA */
 
-.cta {
+.cta,
+.cta-box {
     max-width: 1100px;
     margin: 50px auto;
-    padding: 70px 25px;
+    padding: 60px 25px;
     text-align: center;
     border-radius: 25px;
     background:
@@ -250,16 +236,7 @@ section {
     border: 1px solid var(--border);
 }
 
-.cta h2 {
-    font-size: 42px;
-    margin-bottom: 15px;
-}
-
-.cta p {
-    color: var(--muted);
-}
-
-/* ---------- FOOTER ---------- */
+/* FOOTER */
 
 footer {
     border-top: 1px solid var(--border);
@@ -272,43 +249,97 @@ footer strong {
     color: var(--gold);
 }
 
-/* ---------- MOBILE ---------- */
+/* MOBILE */
 
-@media (max-width: 800px) {
+@media (max-width: 700px) {
 
-    nav {
-        flex-direction: column;
-        gap: 15px;
+    header {
+        position: sticky;
     }
 
-    nav a {
-        margin: 0 7px;
-        font-size: 12px;
+    nav,
+    .navbar {
+        padding: 14px 16px;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .logo,
+    .logo-text {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .nav-links {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px 18px;
+    }
+
+    nav a,
+    .nav-links a {
+        margin: 0;
+        font-size: 14px;
     }
 
     .hero {
-        min-height: 80vh;
+        min-height: auto;
+        padding: 65px 20px;
+    }
+
+    .hero h1 {
+        font-size: clamp(40px, 12vw, 58px);
     }
 
     .hero p {
         font-size: 16px;
     }
 
-    .cards,
-    .steps {
-        grid-template-columns: 1fr;
-    }
-
     section {
-        padding: 65px 20px;
+        padding: 60px 20px;
     }
 
     .section-title h2,
-    .cta h2 {
+    .section-heading h2 {
         font-size: 32px;
     }
 
-    .btn-secondary {
-        margin-left: 0;
+    .cards,
+    .problem-grid,
+    .steps,
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card,
+    .info-card,
+    .step {
+        padding: 28px 22px;
+    }
+
+    .hero-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .hero-buttons a,
+    .hero .btn,
+    .primary-button,
+    .secondary-button {
+        width: 100%;
+        max-width: 330px;
+        margin: 0;
+        text-align: center;
+    }
+
+    .cta,
+    .cta-box {
+        width: calc(100% - 20px);
+        padding: 45px 20px;
+        margin: 30px auto;
     }
 }
