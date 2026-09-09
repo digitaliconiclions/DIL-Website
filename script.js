@@ -16,7 +16,20 @@ if (leadForm) {
         const name = document.getElementById("name").value.trim();
         const email = document.getElementById("email").value.trim();
         const phone = document.getElementById("phone").value.trim();
-
+// Send lead to Make.com instantly
+fetch("https://hook.eu1.make.com/o4d0pxc8etxmyd8q4vausc9ep2stet4d", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: new URLSearchParams({
+        name: name,
+        email: email,
+        phone: phone
+    })
+}).catch(function(error) {
+    console.error("Webhook error:", error);
+});
 
         // Basic validation
 
