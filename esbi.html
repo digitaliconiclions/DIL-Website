@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ESBI | DIL - Digital Iconic Lions</title>
+
+  <!-- Vimeo Player SDK -->
+  <script src="https://player.vimeo.com/api/player.js"></script>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #07111f;
+      color: white;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #b9c4d0;
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      margin-bottom: 15px;
+    }
+
+    .message {
+      margin: 0 auto 30px;
+      max-width: 700px;
+      color: #b9c4d0;
+      line-height: 1.6;
+    }
+
+    .video-box {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      background: #000;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .video-box iframe {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      border: 0;
+    }
+
+    .progress-area {
+      margin-top: 25px;
+      padding: 20px;
+      background: #101d2d;
+      border-radius: 14px;
+    }
+
+    .status {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .progress {
+      font-size: 16px;
+      color: #b9c4d0;
+    }
+
+    .completed {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 10px;
+      background: #123d2b;
+      color: white;
+      display: none;
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="container">
+
+    <div class="logo">
+      🦁 DIL | DIGITAL ICONIC LIONS
+    </div>
+
+    <div class="subtitle">
+      Learn. Understand. Decide.
+    </div>
+
+    <h1>
+      Understanding the ESBI Model
+    </h1>
+
+    <p class="message">
+      Before exploring any business opportunity, take a few minutes
+      to understand the four basic income models.
+    </p>
+
+
+    <!-- Vimeo Video -->
+
+    <div class="video-box">
+
+      <iframe
+        id="esbiVideo"
+        src="https://player.vimeo.com/video/1224444234"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+
+    </div>
+
+
+    <!-- Progress -->
+
+    <div class="progress-area">
+
+      <div
+        class="status"
+        id="status">
+        ⏳ Not Started
+      </div>
+
+      <div
+        class="progress"
+        id="progress">
+        Progress: 0%
+      </div>
+
+      <div
+        class="completed"
+        id="completedMessage">
+
+        🦁 ESBI completed!
+
+        <br>
+
+        Your next learning step will be shared with you.
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    // ==================================================
+    // DIL ESBI TRACKER
+    // ==================================================
+
+    const iframe =
+      document.getElementById("esbiVideo");
+
+    const player =
+      new Vimeo.Player(iframe);
+
+
+    // ==================================================
+    // UI ELEMENTS
+    // ==================================================
+
+    const statusText =
+      document.getElementById("status");
+
+    const progressText =
+      document.getElementById("progress");
+
+    const completedMessage =
+      document.getElementById("completedMessage");
+
+
+    // ==================================================
+    // LEAD ID
+    // ==================================================
+
+    const urlParams =
+      new URLSearchParams(window.location.search);
+
+    const leadId =
+      urlParams.get("lead_id") || "TEST-LEAD";
+
+
+    // ==================================================
+    // MILESTONE CONTROL
+    // ==================================================
+
+    let started = false;
+
+    let milestones = {
+      25: false,
+      50: false,
+      75: false,
+      100: false
+    };
+
+
+    // ==================================================
+    // MAKE WEBHOOK
+    // ==================================================
+
+    const MAKE_WEBHOOK_URL =
+      "https://hook.eu1.make.com/cq9zxnq8pchop0v34qxdsbaassk918wg";
+
+
+    // ==================================================
+    // SEND EVENT TO MAKE
+    // ==================================================
+
+    function sendTrackingEvent(
+      eventName,
+      percentage
+    ) {
+
+      const data = {
+
+        lead_id: leadId,
+
+        video: "ESBI",
+
+        event: eventName,
+
+        percentage: percentage,
+
+        activity_time:
+          new Date().toISOString()
+
+      };
+
+
+      console.log(
+        "🦁 DIL TRACKER EVENT:",
+        data
+      );
+
+
+      fetch(
+        MAKE_WEBHOOK_URL,
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/x-www-form-urlencoded"
+          },
+
+          body:
+            new URLSearchParams(data)
+
+        }
+      )
+
+      .then(function(response) {
+
+        console.log(
+          "✅ DIL Tracker sent:",
+          response.status
+        );
+
+      })
+
+      .catch(function(error) {
+
+        console.error(
+          "❌ DIL Tracker error:",
+          error
+        );
+
+      });
+
+    }
+
+
+    // ==================================================
+    // VIDEO READY
+    // ==================================================
+
+    player.ready()
+
+      .then(function() {
+
+        console.log(
+          "🦁 Vimeo Player Ready"
+        );
+
+      })
+
+      .catch(function(error) {
+
+        console.error(
+          "❌ Vimeo Ready Error:",
+          error
+        );
+
+      });
+
+
+    // ==================================================
+    // VIDEO STARTED
+    // ==================================================
+
+    player.on(
+      "play",
+      function() {
+
+        if (!started) {
+
+          started = true;
+
+          statusText.textContent =
+            "▶️ Started";
+
+          sendTrackingEvent(
+            "Started",
+            0
+          );
+
+        }
+
+      }
+    );
+
+
+    // ==================================================
+    // VIDEO PROGRESS
+    // ==================================================
+
+    player.on(
+      "timeupdate",
+      function(data) {
+
+        if (
+          !data ||
+          !data.duration ||
+          data.duration <= 0
+        ) {
+
+          return;
+
+        }
+
+
+        const percentage =
+          Math.floor(
+            (
+              data.seconds /
+              data.duration
+            ) * 100
+          );
+
+
+        // Visible progress
+
+        progressText.textContent =
+          "Progress: " +
+          percentage +
+          "%";
+
+
+        // ----------------------------------------------
+        // 25%
+        // ----------------------------------------------
+
+        if (
+          percentage >= 25 &&
+          !milestones[25]
+        ) {
+
+          milestones[25] = true;
+
+          statusText.textContent =
+            "▶️ Watching — 25%";
+
+          sendTrackingEvent(
+            "25%",
+            25
+          );
+
+        }
+
+
+        // ----------------------------------------------
+        // 50%
+        // ----------------------------------------------
+
+        if (
+          percentage >= 50 &&
+          !milestones[50]
+        ) {
+
+          milestones[50] = true;
+
+          statusText.textContent =
+            "▶️ Watching — 50%";
+
+          sendTrackingEvent(
+            "50%",
+            50
+          );
+
+        }
+
+
+        // ----------------------------------------------
+        // 75%
+        // ----------------------------------------------
+
+        if (
+          percentage >= 75 &&
+          !milestones[75]
+        ) {
+
+          milestones[75] = true;
+
+          statusText.textContent =
+            "▶️ Watching — 75%";
+
+          sendTrackingEvent(
+            "75%",
+            75
+          );
+
+        }
+
+      }
+    );
+
+
+    // ==================================================
+    // VIDEO COMPLETED
+    // ==================================================
+
+    player.on(
+      "ended",
+      function() {
+
+        milestones[100] = true;
+
+        statusText.textContent =
+          "✅ Completed";
+
+        progressText.textContent =
+          "Progress: 100%";
+
+        completedMessage.style.display =
+          "block";
+
+
+        sendTrackingEvent(
+          "Completed",
+          100
+        );
+
+      }
+    );
+
+
+    // ==================================================
+    // VIMEO ERROR
+    // ==================================================
+
+    player.on(
+      "error",
+      function(error) {
+
+        console.error(
+          "❌ Vimeo Player Error:",
+          error
+        );
+
+      }
+    );
+
+
+    // ==================================================
+    // DEBUG
+    // ==================================================
+
+    console.log(
+      "🦁 DIL ESBI Tracker Loaded"
+    );
+
+    console.log(
+      "Lead ID:",
+      leadId
+    );
+
+  </script>
+
+</body>
+
+</html>
